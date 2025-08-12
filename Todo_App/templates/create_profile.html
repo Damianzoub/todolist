@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Create Profile{% endblock %}
+{% block content %}
+<section id="hero">
+    <div class="container px-10 flex flex-col md:flex-row items-center mx-auto mt-24 md:space-y-6">
+        <!--First half of the screen-->
+        <div class="flex flex-col px-10 space-y-6 md:w-1/2">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages%}
+                    <ul>
+                        {% for category,message in messages%}
+                            <li class="{{category}}">{{message}}</li>
+                        {% endfor%}
+                    </ul>
+                {%endif%}
+            {%endwith%}
+            <form action="" method="post" class="flex-col justify-center item-center space-y-6 ">
+                <fieldset class="border border-gray-300 rounded-md p-4 md:w-1/2">
+                    {{form.hidden_tag()}}
+                    <legend class="font-bold px-2 ">Personal Info</legend>
+                    <!-- Username Field -->
+                    <div class="flex flex-col">
+                        {{ form.username.label(class_="text-sm font-semibold text-gray-600 mb-1") }}
+                        {{ form.username(class_="border rounded-md px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500", placeholder="Enter your username") }}
+                        {%if form.username.errors%}
+                            {%for error in form.username.errors%}       
+                                <ul class="text-red-500 text-sm mt-1">
+                                    <li>{{error}}</li>
+                                </ul>
+                            {%endfor%}
+                        {%endif%}
+                    </div>
+
+                    <!-- Upload Image Field -->
+                    <div class="flex flex-col">
+                        {{ form.image.label(class_="text-sm font-semibold text-gray-600 mb-1") }}
+                        {{ form.image(class_="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-orange-500 file:text-white hover:file:bg-orange-600") }}
+                    </div>
+                </fieldset>
+                {{form.submit(class_="md:w-1/2 bg-orange-500 text-white rounded-md py-2")}}
+            </form>
+        </div>
+        <div class="md:w-1/2">
+            <img src="{{url_for('static',filename='image/')}}" alt="example image of project">
+        </div>
+    </div>
+</section>
+{% endblock %}

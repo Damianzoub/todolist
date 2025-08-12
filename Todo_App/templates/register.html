@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <section id="hero">
+        <div class="container px-10 flex flex-col md:flex-row items-center mx-auto mt-24 md:space-y-6">
+            <!--First half of the screen-->
+            <div class="flex flex-col px-10 space-y-6 md:w-1/2">
+                <h3 class="font-bold text-left text-4xl">Sign Up</h3>
+                <button id="google-signup" class="md:w-1/2 flex items-center justify-center gap-2 bg-orange-500 text-white rounded-md py-2 hover:text-white shadow-md">
+                    <img src="{{url_for('static',filename='image/white-google-logo.png')}}" alt="Google" width="20">
+                    <span class="px-4">Continue with Google</span>
+                </button>
+                <button class="md:w-1/2 flex items-center justify-center gap-2 bg-orange-500 text-white rounded-md py-2">
+                    <img src=" {{ url_for('static',filename='image/facebook.png')}}" alt="Facebook" width="20">
+                    <span class="px-4">Continue with Facebook</span>
+                </button>
+                <button class="md:w-1/2 flex items-center justify-center gap-2 bg-orange-500 text-white rounded-md py-2 hover:text-white shadow-md">
+                    <img src=" {{url_for('static',filename='image/apple.jpeg')}}" alt="Apple" width="20">
+                    <span class="px-4">Continue with Apple</span>
+                </button>
+                <div class="border-b-2 border-gray-200">
+                    
+                </div>
+                <form action="" method="post" class="flex-col justify-center item-center space-y-6 ">
+                    <fieldset class="border border-gray-300 rounded-md p-4 md:w-1/2">
+                        {{ form.hidden_tag()}}
+                        <legend class="font-bold px-2 ">Personal Info</legend>
+                        {{ form.email.label}}<br>
+                        {{ form.email(size=32, class_="w-full border rounded-md p-2")}}
+                        {% if form.email.errors%}
+                            <ul class="text-red-500 text-sm mt-1">
+                                {%for error in form.email.errors%}
+                                    <li>{{error}}</li>
+                                {%endfor%}
+                            </ul>
+                        {%endif%}
+                        <br>
+                        {{ form.password.label}}<br>
+                        {{ form.password(class_="w-full border rounded-md p-2")}}
+                        {%if form.password.errors%}
+                            <ul class="text-red-500 text-sm mt-1">
+                                {%for error in form.password.errors%}
+                                    <li>{{error}}</li>
+                                {%endfor%}
+                            </ul>
+                        {%endif%}
+                    </fieldset>
+                    {{ form.submit(class_="md:w-1/2 bg-orange-500 text-white rounded-md py-2")}}
+                </form>
+                <div class="border-b-2 border-gray-200">
+                    
+                </div>
+                <span class="item-center px-4">
+                    <i>Already have an account?</i> <a href="{{url_for('start.login')}}" class="text-orange-600 hover:text-orange-200"> Start Session</a>
+                </span>
+            </div>
+            <div class="md:w-1/2">
+                <!--I SHOULD PUT AN EXMAMPLE IMAGE OF MY APP-->
+                <img src="{{url_for('static',filename='image/dashboard_screen.png')}}" alt="example image of project">
+            </div>
+        </div>
+    </section>
+    <script src="{{url_for('static',filename='js/googleLogin.js')}}"></script>
+{% endblock %}
