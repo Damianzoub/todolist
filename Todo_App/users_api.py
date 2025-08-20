@@ -132,7 +132,6 @@ def update_password():
     try:
         data = request.get_json()
         new_password = data.get('newPassword')
-        print(data)
         if not new_password:
             return jsonify({
                 "success":False,
@@ -148,11 +147,8 @@ def update_password():
             }),404
 
         encrypted_password = bcrypt.generate_password_hash(new_password)
-        print(encrypted_password)
         User.query.filter_by(user_id = user.user_id).update({User.password:encrypted_password})
-        print(encrypted_password)
         db.session.commit()
-        print(data)
         return jsonify({
             "success":True,
             "message":"Password changed successfully"
