@@ -25,8 +25,7 @@ def get_current_user():
         "photoUrl":user.image or None
     }),200
 
-#LOOK WHY USE_EMAIL & USER_USERNAME RETURN "UNKNOWN"  
-#WORKS BUT WITH THE ABOVE ERROR FOR NOW
+
 @users_bp.route('/logout',methods=['POST'])
 def logout():
     try:
