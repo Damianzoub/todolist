@@ -15,14 +15,12 @@ tasks_bp = Blueprint("tasks",__name__,url_prefix='/tasks')
 @jwt_required
 def add_task():
     try:
-        #FIX IT , IT IS NOT READY YET
         data = request.get_json()
         #Retrieve Data 
         task_name = (data.get('task_name')).strip()
         description =(data.get('description')).strip()
         due_date = data.get('due_date')
         priority = data.get('priority',None)
-        print("done")
         if not task_name:
             return jsonify({
                 "success":False,
@@ -36,7 +34,6 @@ def add_task():
                 "success":False,
                 "message":f"{ValErr}"
             }),400
-        print("done")
         user = request.user
         if not user:
             return jsonify({
@@ -49,7 +46,6 @@ def add_task():
                     due_date= due_date_obj,
                     priority= int(priority),
                     user_id = user.user_id)
-        print("done")
         #Put in the DB
         db.session.add(task)
         db.session.commit()
@@ -70,15 +66,12 @@ def add_task():
 def get_task():
     try:
         user = request.user 
-        print("done")
         if not user:
             return jsonify({
                 "success":False,
                 "message":"User dont exist"
             }),404
-        print('done')
         tasks = Task.query.filter_by(user_id=user.user_id).order_by(Task.due_date).all()
-        print('done')
 
         def to_dict(t:Task):
             return {
