@@ -1,0 +1,26 @@
+# version control
+.git
+.gitignore
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env
+
+# Node modules and build cache
+Todo_App/static/react/node_modules/
+Todo_App/static/react/dist/
+npm-debug.log
+yarn-error.log
+
+# OS metadata and IDE settings
+.DS_Store
+.idea/
+.vscode/
+
+# Test output and local build directories
+dist/
+build/
+coverage/
